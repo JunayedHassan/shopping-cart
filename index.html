@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item" id="cartItem1">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="AmountBtnMinus" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input type="text" class="form-control text-center" id="phoneAmount" value="1">
+                           <button class="btn btn-default" id="AmountBtnPlus"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$<span id="phoneMoney">1219</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item" id="cartItem1Btn">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item" id="cartItem2">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button class="btn btn-default" id="coverBtnMinus"><i class="fas fa-minus"></i></button>
+                           <input type="text" class="form-control text-center" id="coverAmount" value="1">
+                           <button class="btn btn-default" id="coverBtnPlus"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="coverMoney">59</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item" id="cartItem2Btn">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$<span id="subAmount">1278</span></h5>
+                        <h5>$<span id="totalTax">103</span></h5>
+                        <h5>$<span id="total">1381</span></h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <script>
+      // phone amount plus
+      AmountBtnPlus.addEventListener("click", function(){
+      const currentAmount = parseFloat(document.getElementById("phoneAmount").value);
+      const currentAmountNum = currentAmount+ 1;
+      document.getElementById("phoneAmount").value = currentAmountNum;
+      const currentPhoneMoney = parseFloat(document.getElementById("phoneMoney").innerText);
+      const phoneMoneyInteger = 1219;
+      const newPhoneMoney = currentAmountNum *phoneMoneyInteger;
+      document.getElementById("phoneMoney").innerText = newPhoneMoney;
+      
+      // adds it to subtotal
+      const subTotalAmount = parseFloat(document.getElementById("subAmount").innerText);
+      document.getElementById("subAmount").innerText = subTotalAmount + phoneMoneyInteger;
+
+      // adds tax
+      const totalTax = parseFloat(document.getElementById("totalTax").innerText);
+      const phoneTaxInteger = 88;
+      document.getElementById("totalTax").innerText = totalTax + phoneTaxInteger;
+
+      // calculates total amount
+      const total = parseFloat(document.getElementById("total").innerText)
+      document.getElementById("total").innerText = total + phoneTaxInteger + phoneMoneyInteger;
+      })
+     
+      // phone amount minus 
+      AmountBtnMinus.addEventListener("click", function(){
+      const currentAmount = parseFloat(document.getElementById("phoneAmount").value);
+      if(currentAmount > 0 ){
+      const currentAmountNum = currentAmount- 1;
+      document.getElementById("phoneAmount").value = currentAmountNum;
+      const currentPhoneMoney = parseFloat(document.getElementById("phoneMoney").innerText);
+      const phoneMoneyInteger = 1219;
+      const newPhoneMoney = currentAmountNum * phoneMoneyInteger;
+      document.getElementById("phoneMoney").innerText = newPhoneMoney;
+
+      // minus it to subtotal
+      const subTotalAmount = parseFloat(document.getElementById("subAmount").innerText);
+      document.getElementById("subAmount").innerText = subTotalAmount - phoneMoneyInteger;
+
+      // minus tax
+      const totalTax = parseFloat(document.getElementById("totalTax").innerText);
+      const phoneTaxInteger = 88;
+      document.getElementById("totalTax").innerText = totalTax - phoneTaxInteger;
+
+      // calculates total amount
+      const total = parseFloat(document.getElementById("total").innerText)
+      document.getElementById("total").innerText = total - phoneTaxInteger - phoneMoneyInteger;
+         }
+      })
+
+      // cover amount plus
+      coverBtnPlus.addEventListener("click", function(){
+      const currentAmount = parseFloat(document.getElementById("coverAmount").value);
+      const currentAmountNum = currentAmount+ 1;
+      document.getElementById("coverAmount").value = currentAmountNum;
+      const currentCoverMoney = parseFloat(document.getElementById("coverMoney").innerText);
+      const coverMoneyInteger = 59;
+      const newCoverMoney = currentAmountNum * coverMoneyInteger;
+      document.getElementById("coverMoney").innerText = newCoverMoney;
+
+      // adds it to subtotal
+      const subTotalAmount = parseFloat(document.getElementById("subAmount").innerText);
+      document.getElementById("subAmount").innerText = subTotalAmount + coverMoneyInteger;
+
+      // adds tax
+      const totalTax = parseFloat(document.getElementById("totalTax").innerText);
+      const coverTaxInteger = 15;
+      document.getElementById("totalTax").innerText = totalTax + coverTaxInteger;
+
+      // calculates total amount
+      const total = parseFloat(document.getElementById("total").innerText)
+      document.getElementById("total").innerText = total + coverTaxInteger + coverMoneyInteger;
+      })
+
+      // cover amount minus
+      coverBtnMinus.addEventListener("click", function(){
+      const currentAmount = parseFloat(document.getElementById("coverAmount").value);
+      if(currentAmount > 0 ){
+      const currentAmountNum = currentAmount- 1;
+      document.getElementById("coverAmount").value = currentAmountNum;
+      const currentCoverMoney = parseFloat(document.getElementById("coverMoney").innerText);
+      const coverMoneyInteger = 59;
+      const newCoverMoney = currentAmountNum *coverMoneyInteger;
+      document.getElementById("coverMoney").innerText = newCoverMoney;
+
+      // adds it to subtotal
+      const subTotalAmount = parseFloat(document.getElementById("subAmount").innerText);
+      document.getElementById("subAmount").innerText = subTotalAmount - coverMoneyInteger;
+
+      // minus tax
+      const totalTax = parseFloat(document.getElementById("totalTax").innerText);
+      const coverTaxInteger = 15;
+      document.getElementById("totalTax").innerText = totalTax - coverTaxInteger;
+
+      // calculates total amount
+      const total = parseFloat(document.getElementById("total").innerText)
+      document.getElementById("total").innerText = total - coverTaxInteger - coverMoneyInteger;
+         }
+      })
+
+
+      const cartItemBtn1 = document.getElementById("cartItem1Btn");
+      cartItemBtn1.addEventListener("click", function(){
+      const cartItem1Remove = document.getElementById("cartItem1");
+      cartItem1Remove.style.display = "none";
+      })
+
+      const cartItemBtn2 = document.getElementById("cartItem2Btn");
+      cartItemBtn2.addEventListener("click", function(){
+      const cartItem2Remove = document.getElementById("cartItem2");
+      cartItem2Remove.style.display = "none";
+      })
+
+
+      // // const subTotalAmount = document.getElementById("subTotal").innerText;
+      // // const sumOfPrice = newPhoneMoney + newCoverMoney;
+      // // document.getElementById("subTotal").innerText = sumOfPrice;
+   </script>
+</body>
+
+</html>
